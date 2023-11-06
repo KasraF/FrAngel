@@ -111,7 +111,7 @@ public class Settings {
     public static final int MAX_ARRAY_LEN = 100;
 
     // Evaluation of angelic programs
-    public static final int NUM_ANGELIC_CODE_PATHS = 0;
+    public static final int NUM_ANGELIC_CODE_PATHS = 1;
     public static final double SKIP_DUPLICATE_ANGELIC_PROB = 0.75;
     public static final double FRACTION_SMALL = 0.75 - 0.00001;
 
@@ -128,7 +128,7 @@ public class Settings {
     // Various size bounds during random program generation
     public static final int MIN_SIZE = 5; // MIN_SIZE <= (size of program) <= MAX_SIZE
     public static final int MAX_SIZE = 40;
-    public static final int MAX_BLOCK_SIZE = 0; // 1 <= (# statements in a block) <= MAX_BLOCK_SIZE
+    public static final int MAX_BLOCK_SIZE = 1; // 1 <= (# statements in a block) <= MAX_BLOCK_SIZE
     public static final int MAX_LOCAL_VARS = 0; // 1 <= (# local variables) <= MAX_LOCAL_VARS
     public static final int MIN_LOOP_COND_SIZE = 0; // MIN_LOOP_COND_SIZE <= (loop condition size) <= MAX_LOOP_COND_SIZE
     public static final int MAX_LOOP_COND_SIZE = 0;
@@ -151,7 +151,7 @@ public class Settings {
     public static final int SIMILAR_NEW_EXTRA_SIZE = 8; // Without this, fragments wouldn't ever "grow"
 
     // Generating expressions to replace angelic conditions
-    public static final int MAX_RESOLVE_COND_SIZE = 0;
+    public static final int MAX_RESOLVE_COND_SIZE = 1;
 
     // Maximum number of programs to remember (for duplicate-checking), about 200 MB per million elements
     public static final int MAX_ANGELIC_SET_SIZE = 5 * 1000*1000;

@@ -39,7 +39,7 @@ public class ProgramGenerator {
             p.useFragments(expressionFragments, statementFragments);
 
             int size = Utils.randInt(Settings.MIN_SIZE, Settings.MAX_SIZE + 1);
-            int numLocalVars = Utils.randInt(1, Settings.MAX_LOCAL_VARS + 1);
+            int numLocalVars = 0; //Utils.randInt(1, Settings.MAX_LOCAL_VARS + 1);
             size -= numLocalVars;
             int returnSize = 0;
             int bodySize = size;
