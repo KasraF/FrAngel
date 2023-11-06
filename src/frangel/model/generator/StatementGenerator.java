@@ -200,35 +200,36 @@ public class StatementGenerator {
     }
 
     ForLoop genForLoop(int size, int indent) {
-        if (size < 1 + Settings.MIN_LOOP_COND_SIZE + Settings.MIN_STATEMENT_SIZE)
-            return null;
+		return null;
+        // if (size < 1 + Settings.MIN_LOOP_COND_SIZE + Settings.MIN_STATEMENT_SIZE)
+        //     return null;
 
-        // Tell the function about the new loop variable
-        String varName = program.getFreshLoopVar();
-        program.addLoopVar(varName);
-        program.addToScope(varName);
+        // // Tell the function about the new loop variable
+        // String varName = program.getFreshLoopVar();
+        // program.addLoopVar(varName);
+        // program.addToScope(varName);
 
-        int conditionSize = 0;
-        Expression condition = null;
+        // int conditionSize = 0;
+        // Expression condition = null;
 
-        if (!program.isAngelic()) {
-            int maxCondSize = Math.min(Settings.MAX_LOOP_COND_SIZE, size - 1 - Settings.MIN_STATEMENT_SIZE);
-            conditionSize = Utils.randInt(Settings.MIN_LOOP_COND_SIZE, maxCondSize + 1);
-            ExpCategory[] noLiteral = new ExpCategory[] {ExpCategory.FUNC, ExpCategory.OP, ExpCategory.VAR};
-            condition = program.getExpressionGenerator().genExp(conditionSize, boolean.class, noLiteral, true);
-            if (condition == null) {
-                program.removeFromScope(varName);
-                return null;
-            }
-        }
+        // if (!program.isAngelic()) {
+        //     int maxCondSize = Math.min(Settings.MAX_LOOP_COND_SIZE, size - 1 - Settings.MIN_STATEMENT_SIZE);
+        //     conditionSize = Utils.randInt(Settings.MIN_LOOP_COND_SIZE, maxCondSize + 1);
+        //     ExpCategory[] noLiteral = new ExpCategory[] {ExpCategory.FUNC, ExpCategory.OP, ExpCategory.VAR};
+        //     condition = program.getExpressionGenerator().genExp(conditionSize, boolean.class, noLiteral, true);
+        //     if (condition == null) {
+        //         program.removeFromScope(varName);
+        //         return null;
+        //     }
+        // }
 
-        List<Statement> body = genBlock(size - 1 - conditionSize, indent + 1);
-        program.removeFromScope(varName);
-        if (body.isEmpty())
-            return null;
+        // List<Statement> body = genBlock(size - 1 - conditionSize, indent + 1);
+        // program.removeFromScope(varName);
+        // if (body.isEmpty())
+        //     return null;
 
-        ForLoop ret = new ForLoop(varName, condition, body, indent);
-        return ret;
+        // ForLoop ret = new ForLoop(varName, condition, body, indent);
+        // return ret;
     }
 
     private static class Container {
@@ -268,72 +269,75 @@ public class StatementGenerator {
     }
 
     ForEachLoop genForEachLoop(int size, int indent) {
-        if (size < 1 + Settings.MIN_LOOP_COND_SIZE + Settings.MIN_STATEMENT_SIZE)
-            return null;
+		return null;
+//         if (size < 1 + Settings.MIN_LOOP_COND_SIZE + Settings.MIN_STATEMENT_SIZE)
+//             return null;
 
-        List<Container> containers = new ArrayList<>();
-        for (String containerName : program.getVariables().keySet()) {
-            Class<?> containerType = program.getVariables().get(containerName);
-            if (containerType.isArray()) {
-                containers.add(new Container(containerName, Container.ContainerKind.ARRAY, containerType, containerType.getComponentType()));
-//            } else if (containerType.equals(String.class)) {
-//                containers.add(new Container(containerName, Container.ContainerKind.STRING, containerType, char.class));
-            } else {
-                Container.ContainerKind kind = null;
-                if (List.class.isAssignableFrom(containerType))
-                    kind = Container.ContainerKind.LIST;
-                else if (Set.class.isAssignableFrom(containerType))
-                    kind = Container.ContainerKind.SET;
-                else if (Map.class.isAssignableFrom(containerType))
-                    kind = Container.ContainerKind.MAP;
-                else if (Queue.class.isAssignableFrom(containerType))
-                    kind = Container.ContainerKind.QUEUE;
-                else if (Iterable.class.isAssignableFrom(containerType))
-                    kind = Container.ContainerKind.ITERABLE;
-                if (kind != null) {
-                    Class<?> elemType = Utils.getParameterTypeForClass(containerType, program.getParameterTypeMap());
-                    if (elemType != null)
-                        containers.add(new Container(containerName, kind, containerType, elemType));
-                }
-            }
-        }
-        if (containers.isEmpty())
-            return null;
-        Container container = Utils.randElement(containers);
+//         List<Container> containers = new ArrayList<>();
+//         for (String containerName : program.getVariables().keySet()) {
+//             Class<?> containerType = program.getVariables().get(containerName);
+//             if (containerType.isArray()) {
+//                 containers.add(new Container(containerName, Container.ContainerKind.ARRAY, containerType, containerType.getComponentType()));
+// //            } else if (containerType.equals(String.class)) {
+// //                containers.add(new Container(containerName, Container.ContainerKind.STRING, containerType, char.class));
+//             } else {
+//                 Container.ContainerKind kind = null;
+//                 if (List.class.isAssignableFrom(containerType))
+//                     kind = Container.ContainerKind.LIST;
+//                 else if (Set.class.isAssignableFrom(containerType))
+//                     kind = Container.ContainerKind.SET;
+//                 else if (Map.class.isAssignableFrom(containerType))
+//                     kind = Container.ContainerKind.MAP;
+//                 else if (Queue.class.isAssignableFrom(containerType))
+//                     kind = Container.ContainerKind.QUEUE;
+//                 else if (Iterable.class.isAssignableFrom(containerType))
+//                     kind = Container.ContainerKind.ITERABLE;
+//                 if (kind != null) {
+//                     Class<?> elemType = Utils.getParameterTypeForClass(containerType, program.getParameterTypeMap());
+//                     if (elemType != null)
+//                         containers.add(new Container(containerName, kind, containerType, elemType));
+//                 }
+//             }
+//         }
+//         if (containers.isEmpty())
+//             return null;
+//         Container container = Utils.randElement(containers);
 
-        String varName = program.getFreshElemVar();
-        program.addElemVar(varName, container.elemType);
+//         String varName = program.getFreshElemVar();
+//         program.addElemVar(varName, container.elemType);
 
-        program.addToScope(varName);
-        List<Statement> body = genBlock(size - 1, indent + 1);
-        program.removeFromScope(varName);
+//         program.addToScope(varName);
+//         List<Statement> body = genBlock(size - 1, indent + 1);
+//         program.removeFromScope(varName);
 
-        if (body.isEmpty())
-            return null;
+//         if (body.isEmpty())
+//             return null;
 
-        ForEachLoop ret = new ForEachLoop(container.elemType, varName, container.getExpression(), body, indent);
-        return ret;
+//         ForEachLoop ret = new ForEachLoop(container.elemType, varName, container.getExpression(), body, indent);
+//         return ret;
     }
 
     IfStatement genIfStatement(int size, int indent) {
-        if (size < 1 + Settings.MIN_IF_COND_SIZE + Settings.MIN_STATEMENT_SIZE)
-            return null;
+		return null;
 
-        int conditionSize = 0;
-        Expression condition = null;
+        // if (size < 1 + Settings.MIN_IF_COND_SIZE + Settings.MIN_STATEMENT_SIZE)
+        //     return null;
 
-        if (!program.isAngelic()) {
-            int maxCondSize = Math.min(Settings.MAX_IF_COND_SIZE, size - 1 - Settings.MIN_STATEMENT_SIZE);
-            conditionSize = Utils.randInt(Settings.MIN_IF_COND_SIZE, maxCondSize + 1);
-            ExpCategory[] noLiteral = new ExpCategory[] {ExpCategory.FUNC, ExpCategory.OP, ExpCategory.VAR};
-            condition = program.getExpressionGenerator().genExp(conditionSize, boolean.class, noLiteral, true);
-            if (condition == null)
-                return null;
-        }
+        // int conditionSize = 0;
+        // Expression condition = null;
 
-        List<Statement> body = genBlock(size - 1 - conditionSize, indent + 1);
-        if (body.isEmpty())
-            return null;
-        return new IfStatement(condition, body, indent);
+        // if (!program.isAngelic()) {
+        //     int maxCondSize = Math.min(Settings.MAX_IF_COND_SIZE, size - 1 - Settings.MIN_STATEMENT_SIZE);
+        //     conditionSize = Utils.randInt(Settings.MIN_IF_COND_SIZE, maxCondSize + 1);
+        //     ExpCategory[] noLiteral = new ExpCategory[] {ExpCategory.FUNC, ExpCategory.OP, ExpCategory.VAR};
+        //     condition = program.getExpressionGenerator().genExp(conditionSize, boolean.class, noLiteral, true);
+        //     if (condition == null)
+        //         return null;
+        // }
+
+        // List<Statement> body = genBlock(size - 1 - conditionSize, indent + 1);
+        // if (body.isEmpty())
+        //     return null;
+        // return new IfStatement(condition, body, indent);
     }
 }

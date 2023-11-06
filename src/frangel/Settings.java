@@ -50,7 +50,7 @@ public class Settings {
 
     public static int TIME_LIMIT = 1800; // seconds
     public static boolean MINE_FRAGMENTS = true;
-    public static boolean USE_ANGELIC_CONDITIONS = true;
+    public static boolean USE_ANGELIC_CONDITIONS = false;
     public static double SIMPLIFICATION_TIME = 0.1; // fraction of synthesis time
     public static boolean USE_CLASS_CONSTANTS = true;
 
@@ -111,7 +111,7 @@ public class Settings {
     public static final int MAX_ARRAY_LEN = 100;
 
     // Evaluation of angelic programs
-    public static final int NUM_ANGELIC_CODE_PATHS = 55;
+    public static final int NUM_ANGELIC_CODE_PATHS = 0;
     public static final double SKIP_DUPLICATE_ANGELIC_PROB = 0.75;
     public static final double FRACTION_SMALL = 0.75 - 0.00001;
 
@@ -151,7 +151,7 @@ public class Settings {
     public static final int SIMILAR_NEW_EXTRA_SIZE = 8; // Without this, fragments wouldn't ever "grow"
 
     // Generating expressions to replace angelic conditions
-    public static final int MAX_RESOLVE_COND_SIZE = 20;
+    public static final int MAX_RESOLVE_COND_SIZE = 0;
 
     // Maximum number of programs to remember (for duplicate-checking), about 200 MB per million elements
     public static final int MAX_ANGELIC_SET_SIZE = 5 * 1000*1000;
