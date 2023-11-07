@@ -128,7 +128,7 @@ public class Settings {
     // Various size bounds during random program generation
     public static final int MIN_SIZE = 5; // MIN_SIZE <= (size of program) <= MAX_SIZE
     public static final int MAX_SIZE = 40;
-    public static final int MAX_BLOCK_SIZE = 1; // 1 <= (# statements in a block) <= MAX_BLOCK_SIZE
+    public static final int MAX_BLOCK_SIZE = 4; // 1 <= (# statements in a block) <= MAX_BLOCK_SIZE
     public static final int MAX_LOCAL_VARS = 0; // 1 <= (# local variables) <= MAX_LOCAL_VARS
     public static final int MIN_LOOP_COND_SIZE = 0; // MIN_LOOP_COND_SIZE <= (loop condition size) <= MAX_LOOP_COND_SIZE
     public static final int MAX_LOOP_COND_SIZE = 0;

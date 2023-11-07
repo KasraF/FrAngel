@@ -17,7 +17,7 @@ import frangel.utils.ProgramUtils;
 import frangel.utils.Utils;
 
 public class StatementGenerator {
-    public enum StatementCategory { ASSIGN, FUNC, FOR, FOREACH, IF };
+    public enum StatementCategory { FUNC };
 
     // The Program that owns this ExpressionGenerator. In particular, this Program stores the
     // available variables' names and types.
@@ -136,8 +136,8 @@ public class StatementGenerator {
 
     public Statement genStatement(int size, int indent, boolean disableFragments) {
         StatementCategory[] categories =
-                Settings.SYPET_MODE ? new StatementCategory[] {StatementCategory.ASSIGN, StatementCategory.FUNC} :
-                    new StatementCategory[] {StatementCategory.ASSIGN, StatementCategory.FUNC, StatementCategory.FOR, StatementCategory.FOREACH, StatementCategory.IF};
+                Settings.SYPET_MODE ? new StatementCategory[] {StatementCategory.FUNC} :
+                    new StatementCategory[] {StatementCategory.FUNC};
                 return genStatement(size, categories, indent, disableFragments);
     }
 
@@ -160,16 +160,16 @@ public class StatementGenerator {
         for (StatementCategory category : categories) {
             Statement s = null;
             switch (category) {
-            case ASSIGN:
-                s = genVarAssignment(size, indent, disableFragments); break;
+//            case ASSIGN:
+//                s = genVarAssignment(size, indent, disableFragments); break;
             case FUNC:
                 s = genFuncStatement(size, indent, disableFragments); break;
-            case FOR:
-                s = genForLoop(size, indent); break;
-            case FOREACH:
-                s = genForEachLoop(size, indent); break;
-            case IF:
-                s = genIfStatement(size, indent); break;
+//            case FOR:
+//                s = genForLoop(size, indent); break;
+//            case FOREACH:
+//                s = genForEachLoop(size, indent); break;
+//            case IF:
+//                s = genIfStatement(size, indent); break;
             }
             if (s != null)
                 return s;
@@ -178,18 +178,19 @@ public class StatementGenerator {
     }
 
     VarAssignment genVarAssignment(int size, int indent, boolean disableFragments) {
-        List<String> mutable = new ArrayList<String>(program.getLocalVars().keySet());
-        mutable.addAll(program.getArgVars());
-        if (mutable.isEmpty())
-            return null;
-        String name = Utils.randElement(mutable);
-        Class<?> type = program.getVariables().get(name);
-        Expression value = program.getExpressionGenerator().genAnyExp(size - 2, type, disableFragments);
-        if (value == null)
-            return null;
-        if (value instanceof VarExpression && ((VarExpression)value).getName().equals(name))
-            return null;
-        return new VarAssignment(new VarExpression(name, type), value, indent);
+		return null;
+//        List<String> mutable = new ArrayList<String>(program.getLocalVars().keySet());
+//        mutable.addAll(program.getArgVars());
+//        if (mutable.isEmpty())
+//            return null;
+//        String name = Utils.randElement(mutable);
+//        Class<?> type = program.getVariables().get(name);
+//        Expression value = program.getExpressionGenerator().genAnyExp(size - 2, type, disableFragments);
+//        if (value == null)
+//            return null;
+//        if (value instanceof VarExpression && ((VarExpression)value).getName().equals(name))
+//            return null;
+//        return new VarAssignment(new VarExpression(name, type), value, indent);
     }
 
     FuncStatement genFuncStatement(int size, int indent, boolean disableFragments) {

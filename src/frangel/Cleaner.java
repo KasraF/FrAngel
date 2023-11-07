@@ -415,7 +415,7 @@ public class Cleaner {
             Statement replacement = (Utils.randBoolean(0.75) ?
                     program.getStatementGenerator().newOrSimilar(original, originalSize + Settings.SIMILAR_NEW_EXTRA_SIZE) :
                         program.getStatementGenerator().genStatement(originalSize + Settings.SIMILAR_NEW_EXTRA_SIZE,
-                                new StatementCategory[] {StatementCategory.ASSIGN, StatementCategory.FUNC}, original.getIndent(), false));
+                                new StatementCategory[] { StatementCategory.FUNC}, original.getIndent(), false));
 
             if (replacement != null) {
                 int replacementSize = ProgramUtils.size(replacement);
