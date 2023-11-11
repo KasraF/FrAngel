@@ -158,8 +158,8 @@ public class SynthesisTask {
     }
 
     public SynthesisTask addLiterals(Class<?> type, Object... literals) {
-        if (type == null || type.equals(void.class) || !(type.isPrimitive() || type.equals(String.class)))
-            throw new SynthesisTaskException("Only primitive and String literals are supported");
+        // if (type == null || type.equals(void.class) || !(type.isPrimitive() || type.equals(String.class)))
+        //     throw new SynthesisTaskException("Only primitive and String literals are supported");
         if (literals == null)
             return this;
         for (Object literal : literals) {
